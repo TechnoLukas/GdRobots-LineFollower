@@ -1,0 +1,9 @@
+2a60927148abd1d33b818b535e306557
+::res://::1687693667
+connectto.gd::GDScript::-1::1687691289::0::1::::<>Node3D<>::
+icon.svg::CompressedTexture2D::413221163973482236::1687119484::1687119489::1::::<><>::
+main.tscn::PackedScene::5936004536750479753::1687693648::0::1::::<><>::uid://blpns5354p5qk<>res://pathgenerator.gd<>uid://c0266uukn34c2
+pathgenerator.gd::GDScript::-1::1687693597::0::1::::<>Path3D<>::
+Player.gd::GDScript::-1::1687691285::0::1::::<>VehicleBody3D<>::
+Player.tscn::PackedScene::6585239325919389763::1687693621::0::1::::<><>::res://Player.gd<>uid://blpns5354p5qk<>res://connectto.gd
+road.png::CompressedTexture2D::3190286715576075306::1687693667::1687693667::1::::<><>::

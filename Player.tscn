@@ -1,0 +1,292 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0266uukn34c2"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_a3e5e"]
+[ext_resource type="Texture2D" uid="uid://blpns5354p5qk" path="res://road.png" id="2_etj26"]
+[ext_resource type="Script" path="res://connectto.gd" id="2_mbrm2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ovdv"]
+albedo_color = Color(0.321569, 0.376471, 0.596078, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ghmsj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb66f"]
+albedo_color = Color(0.321569, 0.376471, 0.596078, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6aar7"]
+size = Vector3(1.89835, 0.688245, 3.37315)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yeml"]
+albedo_color = Color(0.0313726, 0.0666667, 0.137255, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t1avo"]
+material = SubResource("StandardMaterial3D_5yeml")
+height = 0.2
+radial_segments = 10
+rings = 18
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ytf54"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ej37g"]
+albedo_texture = ExtResource("2_etj26")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q56ym"]
+albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yihwd"]
+albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[node name="Robot" type="VehicleBody3D" node_paths=PackedStringArray("leftcam", "rightcam", "leftc", "rightc")]
+transform = Transform3D(1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0.0119863, 0, 0)
+brake = 0.1
+script = ExtResource("1_a3e5e")
+leftcam = NodePath("Screen/camleftviewport/camleftsubviewport/camleft")
+rightcam = NodePath("Screen/camrightvieport/camrightsubviewport/camright")
+leftc = NodePath("Screen/leftc")
+rightc = NodePath("rightc")
+
+[node name="body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.89525, 0, 0, 0, 0.6916, 0, 0, 0, 3.344, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_6ovdv")
+mesh = SubResource("BoxMesh_ghmsj")
+
+[node name="camerastand" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+size = Vector3(0.4, 1, 0.4)
+material = SubResource("StandardMaterial3D_mb66f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_6aar7")
+
+[node name="Wheel_FrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.5, 1)
+brake = 0.1
+use_as_traction = true
+use_as_steering = true
+suspension_stiffness = 50.0
+damping_compression = 1.9
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel_FrontLeft"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_t1avo")
+
+[node name="Wheel_FrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, 1)
+brake = 0.1
+use_as_traction = true
+use_as_steering = true
+suspension_stiffness = 50.0
+damping_compression = 1.9
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel_FrontRight"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_t1avo")
+
+[node name="Wheel_RearLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.5, -1)
+brake = 0.1
+suspension_stiffness = 50.0
+damping_compression = 1.9
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel_RearLeft"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_t1avo")
+
+[node name="Wheel_RearRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, -1)
+brake = 0.1
+suspension_stiffness = 50.0
+damping_compression = 1.9
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel_RearRight"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_t1avo")
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="maincamviewport" type="SubViewportContainer" parent="Screen"]
+layout_mode = 2
+anchor_left = -0.00868056
+anchor_top = 0.621914
+anchor_right = 0.345486
+anchor_bottom = 0.984568
+offset_left = 20.0
+offset_top = -393.0
+offset_right = 745.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="maincamsubviewport" type="SubViewport" parent="Screen/maincamviewport"]
+handle_input_locally = false
+size = Vector2i(1132, 627)
+render_target_update_mode = 4
+
+[node name="maincam" type="Camera3D" parent="Screen/maincamviewport/maincamsubviewport" node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, -7.57103e-08, 0.965926, 0.258819, -4.37114e-08, 0.258819, -0.965926, 0.0119863, 1.9, 0.3)
+attributes = SubResource("CameraAttributesPractical_ytf54")
+doppler_tracking = 2
+current = true
+script = ExtResource("2_mbrm2")
+target = NodePath("../../../../maincampos")
+
+[node name="camleftviewport" type="SubViewportContainer" parent="Screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.626543
+anchor_right = 0.364583
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="camleftsubviewport" type="SubViewport" parent="Screen/camleftviewport"]
+handle_input_locally = false
+size = Vector2i(399, 222)
+render_target_update_mode = 4
+
+[node name="camleft" type="Camera3D" parent="Screen/camleftviewport/camleftsubviewport" node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.511986, 1.1, 2)
+attributes = SubResource("CameraAttributesPractical_ytf54")
+doppler_tracking = 2
+projection = 1
+current = true
+size = 0.5
+near = 1.0
+script = ExtResource("2_mbrm2")
+target = NodePath("../../../../leftcampos")
+posshift = Vector3(0, 0.5, 0)
+
+[node name="leftc" type="ColorRect" parent="Screen"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 416.0
+offset_right = -742.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="camrightvieport" type="SubViewportContainer" parent="Screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.636285
+anchor_top = 0.626543
+anchor_right = 1.00087
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="camrightsubviewport" type="SubViewport" parent="Screen/camrightvieport"]
+handle_input_locally = false
+size = Vector2i(400, 222)
+render_target_update_mode = 4
+
+[node name="camright" type="Camera3D" parent="Screen/camrightvieport/camrightsubviewport" node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, 8.74228e-08, -2.5411e-21, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, -0.488014, 1.1, 2)
+attributes = SubResource("CameraAttributesPractical_ytf54")
+doppler_tracking = 2
+projection = 1
+current = true
+size = 0.5
+near = 1.0
+script = ExtResource("2_mbrm2")
+target = NodePath("../../../../rightcampos")
+posshift = Vector3(0, 0.5, 0)
+
+[node name="viewcamviewport" type="SubViewportContainer" parent="Screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00868056
+anchor_top = 0.621914
+anchor_right = 0.345486
+anchor_bottom = 0.984568
+offset_left = 752.0
+offset_top = -393.0
+offset_right = 745.0
+offset_bottom = -406.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="viewcamsubviewport" type="SubViewport" parent="Screen/viewcamviewport"]
+handle_input_locally = false
+size = Vector2i(401, 222)
+render_target_update_mode = 4
+
+[node name="viewcam" type="Camera3D" parent="Screen/viewcamviewport/viewcamsubviewport" node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, -7.57103e-08, 0.965926, 0.258819, -4.37114e-08, 0.258819, -0.965926, 0.0119863, 1.9, 0.3)
+attributes = SubResource("CameraAttributesPractical_ytf54")
+doppler_tracking = 2
+current = true
+script = ExtResource("2_mbrm2")
+target = NodePath("../../../../viewcampos")
+
+[node name="rightc" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 743.0
+offset_top = 416.0
+offset_right = -9.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 1.3)
+visible = false
+material_override = SubResource("StandardMaterial3D_ej37g")
+size = Vector3(8, 1, 3.185)
+
+[node name="maincampos" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, -7.57103e-08, 0.965926, 0.258819, -4.37114e-08, 0.258819, -0.965926, 0, 1.9, 0.3)
+size = Vector3(1, 0.6, 1)
+material = SubResource("StandardMaterial3D_q56ym")
+
+[node name="viewcampos" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.246662, 0.0445243, -0.166167, -1.57858e-08, 0.290479, 0.0778335, 0.172029, 0.0638408, -0.238257, -1.58207, 1.9, -0.0720002)
+size = Vector3(1, 0.6, 1)
+material = SubResource("StandardMaterial3D_q56ym")
+
+[node name="leftcampos" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.5, 0.6, 2)
+size = Vector3(0.8, 0.55, 1)
+material = SubResource("StandardMaterial3D_yihwd")
+
+[node name="rightcampos" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.5, 0.6, 2)
+size = Vector3(0.8, 0.55, 1)
+material = SubResource("StandardMaterial3D_yihwd")
