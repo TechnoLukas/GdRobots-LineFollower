@@ -4,12 +4,16 @@ var prevangle
 var pointpos
 @export var robot: VehicleBody3D
 @export var counter: Label
+@export var hcounter: Label
 var gate
 var gate_instance
+var stastdir
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gate=load("res://gate.tscn")
+	stastdir=JSON.parse_string(loadc())
+	hcounter.text=str(stastdir["hstreak"])
 	genarate_path(3)
 
 func create_point(distance,angle):
@@ -39,11 +43,15 @@ func genarate_path(n):
 		
 	
 func _process(delta):
-	print($"../Robot".position.distance_to(curve.get_point_position(curve.point_count-1)))
 	if $"../Robot":
 		if $"../Robot".position.distance_to(curve.get_point_position(curve.point_count-1))<20:
 			reload()
 			counter.text=str(int(counter.text)+1)
+			if int(counter.text)>int(hcounter.text):
+				hcounter.text=str(int(hcounter.text)+1)
+				stastdir = JSON.parse_string(loadc())
+				stastdir["hstreak"]=int(hcounter.text)
+				savec(str(stastdir))
 		if $"../Robot".position.y<0.44:
 			counter.text="0"
 			reload()
@@ -59,4 +67,13 @@ func reload():
 	robot.brake=0.1
 	robot.steering=move_toward(robot.steering, 0, 1)
 	genarate_path(6)
+	
+func savec(content):
+	var file = FileAccess.open("res://stats.txt", FileAccess.WRITE)
+	file.store_string(content)
+
+func loadc():
+	var file = FileAccess.open("res://stats.txt", FileAccess.READ)
+	var content = file.get_as_text()
+	return content
 	

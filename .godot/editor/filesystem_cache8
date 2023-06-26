@@ -1,11 +1,12 @@
 2a60927148abd1d33b818b535e306557
-::res://::1687775876
+::res://::1687781281
 AZONIX.OTF::FontFile::6806304931802084979::1687775876::1687775876::1::::<><>::
 connectto.gd::GDScript::-1::1687691289::0::1::::<>Node3D<>::
+gate.tscn::PackedScene::8190693987359212867::1687780786::0::1::::<><>::
 icon.svg::CompressedTexture2D::413221163973482236::1687119484::1687119489::1::::<><>::
-main.tscn::PackedScene::5936004536750479753::1687775708::0::1::::<><>::uid://blpns5354p5qk<>res://pathgenerator.gd<>uid://c0266uukn34c2
-pathgenerator.gd::GDScript::-1::1687775373::0::1::::<>Path3D<>::
-Player.gd::GDScript::-1::1687775637::0::1::::<>VehicleBody3D<>::
-Player.tscn::PackedScene::6585239325919389763::1687775638::0::1::::<><>::res://Player.gd<>uid://blpns5354p5qk<>res://connectto.gd
+main.tscn::PackedScene::5936004536750479753::1687780774::0::1::::<><>::uid://blpns5354p5qk<>res://pathgenerator.gd<>uid://c0266uukn34c2<>uid://c38a33cpjrxmh
+pathgenerator.gd::GDScript::-1::1687780037::0::1::::<>Path3D<>::
+Player.gd::GDScript::-1::1687780785::0::1::::<>VehicleBody3D<>::
+Player.tscn::PackedScene::6585239325919389763::1687780774::0::1::::<><>::res://Player.gd<>uid://blpns5354p5qk<>res://connectto.gd
 README.md::TextFile::-1::1687708897::0::1::::<><>::
 road.png::CompressedTexture2D::3190286715576075306::1687693667::1687693667::1::::<><>::

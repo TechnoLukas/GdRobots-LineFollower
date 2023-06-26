@@ -21,12 +21,13 @@ uv1_scale = Vector3(8, 8, 8)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="path" type="Path3D" parent="." node_paths=PackedStringArray("robot", "counter")]
+[node name="path" type="Path3D" parent="." node_paths=PackedStringArray("robot", "counter", "hcounter")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0800028, -0.0422368, -0.126131)
 curve = SubResource("Curve3D_vmmhh")
 script = ExtResource("1_67sfo")
 robot = NodePath("../Robot")
 counter = NodePath("../n")
+hcounter = NodePath("../hn")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
 use_collision = true
@@ -62,6 +63,15 @@ text = "Genarate"
 [node name="Robot" parent="." instance=ExtResource("3_yew0q")]
 transform = Transform3D(-5.96046e-08, 4.47035e-08, 1, 0, 1, -4.47035e-08, -1, -2.66454e-15, -5.96046e-08, 0, 0.5, 0)
 
+[node name="hn" type="Label" parent="."]
+offset_left = 231.0
+offset_top = 58.0
+offset_right = 429.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("4_ytq6f")
+theme_override_font_sizes/font_size = 35
+text = "0"
+
 [node name="n" type="Label" parent="."]
 offset_left = 192.0
 offset_top = 19.0
@@ -78,6 +88,7 @@ offset_right = 273.0
 offset_bottom = 57.0
 theme_override_fonts/font = ExtResource("4_ytq6f")
 theme_override_font_sizes/font_size = 35
-text = "streak:"
+text = "streak:
+hightest:"
 
 [connection signal="pressed" from="Button" to="path" method="_on_button_pressed"]

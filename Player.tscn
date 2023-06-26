@@ -35,7 +35,7 @@ albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yihwd"]
 albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
 
-[node name="Robot" type="VehicleBody3D" node_paths=PackedStringArray("leftcam", "rightcam", "leftc", "rightc")]
+[node name="Robot" type="VehicleBody3D" node_paths=PackedStringArray("leftcam", "rightcam", "leftc", "rightc", "KPl", "KIl", "KDl")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0.0119863, 0, 0)
 brake = 0.1
 script = ExtResource("1_a3e5e")
@@ -43,6 +43,9 @@ leftcam = NodePath("Screen/camleftviewport/camleftsubviewport/camleft")
 rightcam = NodePath("Screen/camrightvieport/camrightsubviewport/camright")
 leftc = NodePath("Screen/leftc")
 rightc = NodePath("rightc")
+KPl = NodePath("VBoxContainer/Pl")
+KIl = NodePath("VBoxContainer/Il")
+KDl = NodePath("VBoxContainer/Dl")
 
 [node name="body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.89525, 0, 0, 0, 0.6916, 0, 0, 0, 3.344, 0, 0.5, 0)
@@ -291,3 +294,32 @@ material = SubResource("StandardMaterial3D_yihwd")
 transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.5, 0.6, 2)
 size = Vector3(0.8, 0.55, 1)
 material = SubResource("StandardMaterial3D_yihwd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 19.0
+offset_top = 281.0
+offset_right = 325.0
+offset_bottom = 393.0
+theme_override_constants/separation = 28
+
+[node name="Pl" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Il" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 0.1
+step = 0.01
+value = 0.01
+
+[node name="Dl" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[connection signal="value_changed" from="VBoxContainer/Pl" to="." method="_on_pl_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Il" to="." method="_on_il_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Dl" to="." method="_on_dl_value_changed"]

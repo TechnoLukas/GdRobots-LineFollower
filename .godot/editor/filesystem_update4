@@ -1,5 +1,6 @@
-res://Player.tscn
 res://main.tscn
-res://pathgenerator.gd
-res://Player.gd
+res://Player.tscn
 res://gate.tscn
+res://Player.gd
+res://pathgenerator.gd
+res://stats.txt
