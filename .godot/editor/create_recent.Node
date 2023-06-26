@@ -1,9 +1,13 @@
+OmniLight3D
+SpotLight3D
+Node3D
+CSGBox3D
+Label
+TextEdit
 ColorRect
 Button
 Camera3D
 VehicleWheel3D
-Node3D
-CSGBox3D
 Control
 SubViewportContainer
 SubViewport

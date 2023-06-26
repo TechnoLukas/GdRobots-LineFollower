@@ -27,7 +27,6 @@ func drive(delta):
 	var backward = Input.get_action_strength("backward")
 	var left = Input.get_action_strength("left")
 	var right = Input.get_action_strength("right")
-	print(left)
 	
 	#steer_target = left - right
 	steer_target *= MAX_STEER_ANGLE
@@ -60,11 +59,11 @@ func autopilot(delta):
 
 	leftc.color=Color(leftsensorC,leftsensorC,leftsensorC)
 	rightc.color=Color(rightsensorC,rightsensorC,rightsensorC)
-	if not (snapped(leftsensorC,0.01)>5 and snapped(rightsensorC,0.01)>5):
-		turnk = ((rightsensorC/leftsensorC)-(leftsensorC/rightsensorC))/4
-	print(snapped(leftsensorC,0.01),"    ",snapped(rightsensorC,0.01),"    ",snapped(turnk,0.01))
+	if not (snapped(leftsensorC,0.01)>0.5 and snapped(rightsensorC,0.01)>0.5):
+		turnk = ((rightsensorC/leftsensorC)-(leftsensorC/rightsensorC))/2
+	#print(snapped(leftsensorC,0.01),"    ",snapped(rightsensorC,0.01),"    ",snapped(turnk,0.01))
 	steer_target=turnk
-	if linear_velocity.length() < MAX_SPEED/1.3:
+	if linear_velocity.length() < MAX_SPEED/1:
 		engine_force = MAX_ENGINE_FORCE
 	
 	

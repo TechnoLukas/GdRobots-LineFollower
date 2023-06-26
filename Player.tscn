@@ -153,9 +153,10 @@ target = NodePath("../../../../maincampos")
 [node name="camleftviewport" type="SubViewportContainer" parent="Screen"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.626543
-anchor_right = 0.364583
-anchor_bottom = 1.0
+anchor_left = 0.299479
+anchor_top = 0.666667
+anchor_right = 0.485243
+anchor_bottom = 0.776235
 offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
@@ -167,7 +168,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="camleftsubviewport" type="SubViewport" parent="Screen/camleftviewport"]
 handle_input_locally = false
-size = Vector2i(399, 222)
+size = Vector2i(194, 51)
 render_target_update_mode = 4
 
 [node name="camleft" type="Camera3D" parent="Screen/camleftviewport/camleftsubviewport" node_paths=PackedStringArray("target")]
@@ -186,20 +187,20 @@ posshift = Vector3(0, 0.5, 0)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 416.0
-offset_right = -742.0
-offset_bottom = -192.0
+offset_left = 355.0
+offset_top = 430.0
+offset_right = -603.0
+offset_bottom = -207.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="camrightvieport" type="SubViewportContainer" parent="Screen"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.636285
-anchor_top = 0.626543
-anchor_right = 1.00087
-anchor_bottom = 1.0
+anchor_left = 0.515625
+anchor_top = 0.666667
+anchor_right = 0.701389
+anchor_bottom = 0.776235
 offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
@@ -211,7 +212,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="camrightsubviewport" type="SubViewport" parent="Screen/camrightvieport"]
 handle_input_locally = false
-size = Vector2i(400, 222)
+size = Vector2i(194, 51)
 render_target_update_mode = 4
 
 [node name="camright" type="Camera3D" parent="Screen/camrightvieport/camrightsubviewport" node_paths=PackedStringArray("target")]
@@ -243,7 +244,7 @@ stretch = true
 
 [node name="viewcamsubviewport" type="SubViewport" parent="Screen/viewcamviewport"]
 handle_input_locally = false
-size = Vector2i(401, 222)
+size = Vector2i(400, 221)
 render_target_update_mode = 4
 
 [node name="viewcam" type="Camera3D" parent="Screen/viewcamviewport/viewcamsubviewport" node_paths=PackedStringArray("target")]
@@ -258,10 +259,10 @@ target = NodePath("../../../../viewcampos")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 743.0
-offset_top = 416.0
-offset_right = -9.0
-offset_bottom = -192.0
+offset_left = 604.0
+offset_top = 431.0
+offset_right = -354.0
+offset_bottom = -207.0
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqtpellwjfdu4"]
+[gd_scene load_steps=8 format=3 uid="uid://cqtpellwjfdu4"]
 
 [ext_resource type="Texture2D" uid="uid://blpns5354p5qk" path="res://road.png" id="1_1yigo"]
 [ext_resource type="Script" path="res://pathgenerator.gd" id="1_67sfo"]
 [ext_resource type="PackedScene" uid="uid://c0266uukn34c2" path="res://Player.tscn" id="3_yew0q"]
+[ext_resource type="FontFile" uid="uid://c38a33cpjrxmh" path="res://AZONIX.OTF" id="4_ytq6f"]
 
 [sub_resource type="Curve3D" id="Curve3D_vmmhh"]
 _data = {
@@ -20,10 +21,12 @@ uv1_scale = Vector3(8, 8, 8)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="path" type="Path3D" parent="."]
+[node name="path" type="Path3D" parent="." node_paths=PackedStringArray("robot", "counter")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0800028, -0.0422368, -0.126131)
 curve = SubResource("Curve3D_vmmhh")
 script = ExtResource("1_67sfo")
+robot = NodePath("../Robot")
+counter = NodePath("../n")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
 use_collision = true
@@ -57,6 +60,24 @@ offset_bottom = 47.0
 text = "Genarate"
 
 [node name="Robot" parent="." instance=ExtResource("3_yew0q")]
-transform = Transform3D(-5.96046e-08, 4.47035e-08, 1, 0, 1, -4.47035e-08, -1, -2.66454e-15, -5.96046e-08, 0.0119863, 0, 0)
+transform = Transform3D(-5.96046e-08, 4.47035e-08, 1, 0, 1, -4.47035e-08, -1, -2.66454e-15, -5.96046e-08, 0, 0.5, 0)
+
+[node name="n" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 19.0
+offset_right = 390.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("4_ytq6f")
+theme_override_font_sizes/font_size = 35
+text = "0"
+
+[node name="text" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 273.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_ytq6f")
+theme_override_font_sizes/font_size = 35
+text = "streak:"
 
 [connection signal="pressed" from="Button" to="path" method="_on_button_pressed"]
