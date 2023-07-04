@@ -61,7 +61,7 @@ func _on_button_pressed():
 	genarate_path(3)
 	
 func reload():
-	robot.position=Vector3(0,0.5,0)
+	robot.position=Vector3(0,0.45,0)
 	robot.rotation_degrees=Vector3(0,90,0)
 	robot.engine_force=0
 	robot.brake=0.1

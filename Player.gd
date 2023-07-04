@@ -7,6 +7,10 @@ extends VehicleBody3D
 @export var KPl: Slider
 @export var KIl: Slider
 @export var KDl: Slider
+@export var Plab: Label
+@export var Ilab: Label
+@export var Dlab: Label
+
 
 
 const MAX_STEER_ANGLE = 0.6
@@ -34,6 +38,9 @@ func _ready():
 	KPl.value=KP
 	KIl.value=KI
 	KDl.value=KD
+	Plab.text=str(KP)
+	Ilab.text=str(KI)
+	Dlab.text=str(KD)
 
 func _physics_process(delta):
 	drive(delta)
@@ -79,7 +86,7 @@ func autopilot(delta):
 	rightc.color=Color(rightsensorC,rightsensorC,rightsensorC)
 
 	
-	if not (snappedf(leftsensorC,0.01)>0.5 and snappedf(rightsensorC,0.01)>0.5):
+	if not (snappedf(leftsensorC,0.01)>2 and snappedf(rightsensorC,1)>2):
 		ERR = (rightsensorC/leftsensorC)-(leftsensorC/rightsensorC)
 	
 		if !is_nan(ERR):
@@ -87,7 +94,7 @@ func autopilot(delta):
 		if is_inf(INT):
 			INT=0.0
 	
-	print("KP:",KP,"    KI:",KI,"    KD:",KD)
+	#print("KP:",KP,"    KI:",KI,"    KD:",KD)
 	steer_target=ERR*KP+(PREVERR-ERR)*KD+INT*KI
 	
 	PREVERR=ERR
@@ -98,6 +105,7 @@ func autopilot(delta):
 	
 func _on_pl_value_changed(value):
 	KP=value
+	Plab.text=str(value)
 	stastdir=JSON.parse_string(loadc())
 	stastdir["KP"]=KP
 	savec(str(stastdir))
@@ -105,6 +113,7 @@ func _on_pl_value_changed(value):
 
 func _on_il_value_changed(value):
 	KI=value
+	Ilab.text=str(value)
 	stastdir=JSON.parse_string(loadc())
 	stastdir["KI"]=KI
 	savec(str(stastdir))
@@ -112,6 +121,7 @@ func _on_il_value_changed(value):
 
 func _on_dl_value_changed(value):
 	KD=value
+	Dlab.text=str(value)
 	stastdir=JSON.parse_string(loadc())
 	stastdir["KD"]=KD
 	savec(str(stastdir))

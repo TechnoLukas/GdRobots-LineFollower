@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0266uukn34c2"]
+[gd_scene load_steps=15 format=3 uid="uid://c0266uukn34c2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_a3e5e"]
 [ext_resource type="Texture2D" uid="uid://blpns5354p5qk" path="res://road.png" id="2_etj26"]
 [ext_resource type="Script" path="res://connectto.gd" id="2_mbrm2"]
+[ext_resource type="Script" path="res://graph.gd" id="4_p3ot7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ovdv"]
 albedo_color = Color(0.321569, 0.376471, 0.596078, 1)
@@ -35,7 +36,7 @@ albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yihwd"]
 albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
 
-[node name="Robot" type="VehicleBody3D" node_paths=PackedStringArray("leftcam", "rightcam", "leftc", "rightc", "KPl", "KIl", "KDl")]
+[node name="Robot" type="VehicleBody3D" node_paths=PackedStringArray("leftcam", "rightcam", "leftc", "rightc", "KPl", "KIl", "KDl", "Plab", "Ilab", "Dlab")]
 transform = Transform3D(1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0.0119863, 0, 0)
 brake = 0.1
 script = ExtResource("1_a3e5e")
@@ -43,9 +44,12 @@ leftcam = NodePath("Screen/camleftviewport/camleftsubviewport/camleft")
 rightcam = NodePath("Screen/camrightvieport/camrightsubviewport/camright")
 leftc = NodePath("Screen/leftc")
 rightc = NodePath("rightc")
-KPl = NodePath("VBoxContainer/Pl")
-KIl = NodePath("VBoxContainer/Il")
-KDl = NodePath("VBoxContainer/Dl")
+KPl = NodePath("VBoxContainer/Pl_container/Pl")
+KIl = NodePath("VBoxContainer/Il_container/Il")
+KDl = NodePath("VBoxContainer/Dl_container/Dl")
+Plab = NodePath("VBoxContainer/Pl_container/n")
+Ilab = NodePath("VBoxContainer/Il_container/n")
+Dlab = NodePath("VBoxContainer/Dl_container/n")
 
 [node name="body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.89525, 0, 0, 0, 0.6916, 0, 0, 0, 3.344, 0, 0.5, 0)
@@ -295,6 +299,13 @@ transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.5099
 size = Vector3(0.8, 0.55, 1)
 material = SubResource("StandardMaterial3D_yihwd")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 15.0
+offset_top = 272.0
+offset_right = 331.0
+offset_bottom = 419.0
+color = Color(0.372549, 0.372549, 0.372549, 1)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 19.0
 offset_top = 281.0
@@ -302,24 +313,90 @@ offset_right = 325.0
 offset_bottom = 393.0
 theme_override_constants/separation = 28
 
-[node name="Pl" type="HSlider" parent="VBoxContainer"]
+[node name="Pl_container" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pl" type="HSlider" parent="VBoxContainer/Pl_container"]
+layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="Il" type="HSlider" parent="VBoxContainer"]
+[node name="label" type="Label" parent="VBoxContainer/Pl_container"]
 layout_mode = 2
+text = "P:"
+
+[node name="n" type="Label" parent="VBoxContainer/Pl_container"]
+layout_mode = 2
+text = "0"
+
+[node name="Il_container" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Il" type="HSlider" parent="VBoxContainer/Il_container"]
+layout_mode = 2
+size_flags_horizontal = 3
 max_value = 0.1
 step = 0.01
 value = 0.01
 
-[node name="Dl" type="HSlider" parent="VBoxContainer"]
+[node name="label" type="Label" parent="VBoxContainer/Il_container"]
 layout_mode = 2
+text = "  I:
+"
+
+[node name="n" type="Label" parent="VBoxContainer/Il_container"]
+layout_mode = 2
+text = "0"
+
+[node name="Dl_container" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Dl" type="HSlider" parent="VBoxContainer/Dl_container"]
+layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.5
 
-[connection signal="value_changed" from="VBoxContainer/Pl" to="." method="_on_pl_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/Il" to="." method="_on_il_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/Dl" to="." method="_on_dl_value_changed"]
+[node name="label" type="Label" parent="VBoxContainer/Dl_container"]
+layout_mode = 2
+text = "D:"
+
+[node name="n" type="Label" parent="VBoxContainer/Dl_container"]
+layout_mode = 2
+text = "0"
+
+[node name="graph" type="ColorRect" parent="."]
+offset_left = 294.0
+offset_top = 11.0
+offset_right = 732.0
+offset_bottom = 232.0
+color = Color(0.607843, 0.607843, 0.607843, 1)
+script = ExtResource("4_p3ot7")
+
+[node name="label1" type="Label" parent="graph"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 166.0
+offset_right = 156.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+text = "error"
+
+[node name="label2" type="Label" parent="graph"]
+offset_left = 4.0
+offset_top = 166.0
+offset_right = 156.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0, 0.501961, 0.6, 1)
+text = "
+steering angle"
+
+[connection signal="value_changed" from="VBoxContainer/Pl_container/Pl" to="." method="_on_pl_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Il_container/Il" to="." method="_on_il_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Dl_container/Dl" to="." method="_on_dl_value_changed"]

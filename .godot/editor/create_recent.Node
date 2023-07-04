@@ -1,12 +1,18 @@
+ColorRect
+Label
+HBoxContainer
+Line2D
+GraphNode
+GraphEdit
+CSGPolygon3D
+CSGCylinder3D
 VBoxContainer
 HSlider
 OmniLight3D
 SpotLight3D
 Node3D
 CSGBox3D
-Label
 TextEdit
-ColorRect
 Button
 Camera3D
 VehicleWheel3D
@@ -17,5 +23,4 @@ Node
 DirectionalLight3D
 WorldEnvironment
 CSGMesh3D
-CSGPolygon3D
 Path3D
