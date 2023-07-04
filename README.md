@@ -6,6 +6,8 @@
 
 ![preview.gif](preview.gif)
 
+👆gif (will load pretty slow, because it is big)
+
 ## Features
 
 - Random path generator (Using `Path3D`)
