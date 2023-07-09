@@ -12,8 +12,11 @@ var stastdir
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gate=load("res://gate.tscn")
-	stastdir=JSON.parse_string(loadc())
-	hcounter.text=str(stastdir["hstreak"])
+	if OS.has_feature("web"):
+		hcounter.text="0"
+	else:
+		stastdir=JSON.parse_string(loadc())
+		hcounter.text=str(stastdir["hstreak"])
 	genarate_path(3)
 
 func create_point(distance,angle):

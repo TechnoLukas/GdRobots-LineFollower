@@ -22,7 +22,7 @@ uv1_scale = Vector3(8, 8, 8)
 [node name="Node3D" type="Node3D"]
 
 [node name="path" type="Path3D" parent="." node_paths=PackedStringArray("robot", "counter", "hcounter")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0800028, -0.0422368, -0.126131)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.188815, -0.104388, -0.230098)
 curve = SubResource("Curve3D_vmmhh")
 script = ExtResource("1_67sfo")
 robot = NodePath("../Robot")
@@ -48,7 +48,7 @@ material = SubResource("StandardMaterial3D_llaaj")
 environment = SubResource("Environment_r3lav")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.116978, 0.939693, -0.321394, -0.321394, 0.34202, 0.883022, 0.939693, 5.38137e-08, 0.34202, 0, 0, 0)
+transform = Transform3D(-0.755308, 0.469847, -0.456895, -0.321394, 0.34202, 0.883022, 0.571153, 0.813797, -0.107325, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 56, 27.851, 21.6)

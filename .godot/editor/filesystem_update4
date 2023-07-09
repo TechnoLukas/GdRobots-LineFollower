@@ -1,7 +1,3 @@
-res://gate.tscn
 res://main.tscn
 res://Player.tscn
-res://graph.gd
-res://stats.txt
-res://stats_.txt
-res://Player.gd
+res://gate.tscn

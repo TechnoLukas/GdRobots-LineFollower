@@ -31,16 +31,22 @@ var KI = 0.01
 var KD = 0.5
 
 func _ready():
-	stastdir=JSON.parse_string(loadc())
-	KP=stastdir["KP"]
-	KI=stastdir["KI"]
-	KD=stastdir["KD"]
+	if OS.has_feature("web"):
+		KP=0.81
+		KI=0.01
+		KD=0.12
+	else:
+		stastdir=JSON.parse_string(loadc())
+		KP=stastdir["KP"]
+		KI=stastdir["KI"]
+		KD=stastdir["KD"]
 	KPl.value=KP
 	KIl.value=KI
 	KDl.value=KD
 	Plab.text=str(KP)
 	Ilab.text=str(KI)
 	Dlab.text=str(KD)
+	
 
 func _physics_process(delta):
 	drive(delta)
